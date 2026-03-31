@@ -1,0 +1,61 @@
+index.html <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kozmik Twizt | Official Site</title>
+<style>
+/* This section makes it look sleek and dark */
+body {
+background-color: #0a0a0a;
+color: #00f2ff;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+text-align: center;
+padding: 50px;
+}
+h1 { font-size: 3rem; text-shadow: 0 0 10px #00f2ff; letter-spacing: 4px; }
+.content-box {
+max-width: 800px;
+margin: auto;
+background: #111;
+padding: 20px;
+border: 1px solid #333;
+border-radius: 15px;
+box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+}
+iframe {
+width: 100%;
+border-radius: 10px;
+border: none;
+margin-top: 20px;
+}
+.music-link {
+display: inline-block;
+margin-top: 20px;
+padding: 10px 20px;
+background: #00f2ff;
+color: #000;
+text-decoration: none;
+font-weight: bold;
+border-radius: 5px;
+}
+</style>
+</head>
+<body>
+
+<h1>KOZMIK TWIZT</h1>
+
+<div class="content-box">
+<h2>LATEST VIDEO</h2>
+<iframe height="400" src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+
+<hr style="border: 0.5px solid #333; margin: 40px 0;">
+
+<h2>MUSIC PLAYER</h2>
+<p>Listen to my latest track in high quality:</p>
+<a href="YOUR_MUSIC_LINK_HERE" class="music-link" target="_blank">PLAY HIGH QUALITY AUDIO</a>
+
+</div>
+
+</body>
+</html>

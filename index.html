@@ -6,113 +6,114 @@
     <title>KRYZTALYZR | Diamond Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            @keyframes pulse {
-    0% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
-    50% { opacity: 1; text-shadow: 0 0 20px var(--diamond-glow); }
-    100% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+       :root {
+      --silver: #C0C0C0;
+      --diamond-glow: rgba(224, 247, 250, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: radial-gradient(circle at center, #111 0%, #000 100%);
+    }
+#snow-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1; 
 }
-#player-container {
-    margin-top: 30px;
-    padding: 20px;
-    border-top: 1px solid var(--glass-border);
-    display: none; /* Hidden until you click a song */
+    #snow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      text-align: center;
+    
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5rem;
+      letter-spacing: 12px;
+      color: var(--silver);
+      text-shadow: 0 0 15px var(--diamond-glow);
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      color: #888;
+      margin-bottom: 50px;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    }
+
+    .track-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: var(--silver);
+      padding: 15px 25px;
+      cursor: pointer;
+      font-family: 'Orbitron', sans-serif;
+      transition: 0.3s;
+      border-radius: 10px;
+      min-width: 150px;
+    }
+
+    .track-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+      box-shadow: 0 0 15px var(--diamond-glow);
+    }
+
+    #player-container {
+      margin-top: 30px;
+      padding: 20px;
+      border-top: 1px solid var(--glass-border);
+      display: none;
+    }
+
+    audio {
+      width: 100%;
+      filter: invert(100%);
+      opacity: 0.8;
+    }
+.pulse-text {
+  animation: pulse 2s infinite ease-in-out;
 }
-
-audio { width: 100%; filter: invert(100%); opacity: 0.8; }
-            --silver: #C0C0C0;
-            --diamond-glow: rgba(224, 247, 250, 0.8);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
-        body {
-            background-color: #000;
-            color: #fff;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-        }
-
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .container {
-            position: relative;
-            z-index: 2;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            letter-spacing: 12px;
-            color: var(--silver);
-            text-shadow: 0 0 15px var(--diamond-glow);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .subtitle {
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            color: #888;
-            margin-bottom: 50px;
-        }
-
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-            position: relative;
-        }
-
-        h2 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            color: var(--silver);
-            border-bottom: 1px solid var(--glass-border);
-            display: inline-block;
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-
-      .grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-bottom: 20px;
-
-      .track-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    color: var(--silver);
-    padding: 15px 25px;
-    text-decoration: none;
-    font-family: 'Orbitron', sans-serif;
-    transition: 0.3s;
-    border-radius: 10px;
-    text-align: center;
-    flex: 1;
-    min-width: 150px;
-    max-width: 250px;
-}
+    @keyframes pulse {
+      0% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+      50% { opacity: 1; text-shadow: 0 0 20px var(--diamond-glow); }
+      100% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+    }
 @media (max-width: 768px) {
     .grid {
         flex-direction: column;
@@ -162,6 +163,9 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }
             color: #000;
             box-shadow: 0 0 20px #fff;
         }
+        .pulse-text {
+  animation: pulse 2s infinite ease-in-out;
+}
   @keyframes pulse {
     0% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
     50% { opacity: 1; text-shadow: 0 0 20px var(--diamond-glow); }
@@ -186,9 +190,9 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
             <h1>KRYZTALYZR</h1>
             <div class="subtitle">DIAMOND TRANSMISSION // 2026</div>
         </header>
-
+<h2 class="pulse-text">[ VISUAL_DATA_PENDING ]</h2>
         <section class="glass-card">
-            <h2>LATEST VISUALS</h2>
+          
             <div class="grid">
                 <div class="glass-card" style="display: flex; align-items: center; justify-content: center; min-height: 300px; border: 1px dashed var(--silver);">
     <p style="font-family: 'Orbitron'; letter-spacing: 5px; color: var(--silver); animation: pulse 2s infinite;">[ VISUAL_DATA_PENDING ]</p>
@@ -205,15 +209,69 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
             <div id="player-container">
                 <p id="now-playing" style="font-size: 0.7rem; letter-spacing: 2px; color: #888; margin-bottom: 10px;">STREAMING ACTIVE</p>
                 <audio id="main-player" controls>
-                    <source id="audio-source" src="" type="audio/wav">
+                    <source id="audio-source" src="" type="audio/mpeg">
                 </audio>
             </div>
         </section>
      <div class="links-footer">
             <a href="https://instagram.com/kryztalyzr" class="social-link">INSTAGRAM</a>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
-         
-   </div>
-    <script src="script.js"></script>
+         <script>
+    // --- AUDIO LOGIC ---
+    function playSong(fileName) {
+        const playerContainer = document.getElementById('player-container');
+        const audio = document.getElementById('main-player');
+        const source = document.getElementById('audio-source');
+
+        // This matches the file names in your GitHub repo exactly
+        source.src = fileName;
+        playerContainer.style.display = 'block';
+        audio.load();
+        audio.play();
+        
+        document.getElementById('now-playing').innerText = "NOW STREAMING: " + fileName.replace(' (Full Song).mp3', '');
+    }
+
+    // --- SNOW LOGIC ---
+    const canvas = document.getElementById('snow-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, snowflakes;
+
+    function initSnow() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+        snowflakes = Array.from({ length: 120 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 3 + 1,
+            d: Math.random() * 1
+        }));
+    }
+
+    function drawSnow() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+        ctx.beginPath();
+        snowflakes.forEach(f => {
+            ctx.moveTo(f.x, f.y);
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+        });
+        ctx.fill();
+        moveSnow();
+    }
+
+    function moveSnow() {
+        snowflakes.forEach(f => {
+            f.y += Math.pow(f.d, 2) + 1;
+            if (f.y > height) f.y = -5;
+        });
+    }
+
+    window.addEventListener('resize', initSnow);
+    initSnow();
+    setInterval(drawSnow, 30);
+</script>
 </body>
-</html>
+</html> 

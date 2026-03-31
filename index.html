@@ -199,60 +199,74 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
      <div class="links-footer">
             <a href="https://instagram.com/kryztalyzr" class="social-link">INSTAGRAM</a>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
-        </div>
-     <script>
- function playSong(driveId) {
+     <style>
+        /* Diamond & Leaf Styles */
+        .falling-item {
+            position: fixed;
+            top: -50px;
+            pointer-events: none;
+            z-index: 9999;
+            animation: fall linear infinite;
+        }
+
+        .diamond {
+            color: #fff;
+            /* Shine + Black Ice Edge */
+            text-shadow: 0 0 10px #fff, 0 0 20px var(--diamond-glow);
+            font-size: 20px;
+            filter: drop-shadow(2px 2px 1px rgba(0,0,0,1)); 
+        }
+
+        .leaf {
+            color: #ffd700;
+            /* Golden Glow */
+            text-shadow: 0 0 8px #b8860b, 0 0 15px #ffd700;
+            font-size: 22px;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(0vh) rotate(0deg) translateX(0px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(105vh) rotate(360deg) translateX(50px); opacity: 0; }
+        }
+    </style>
+
+    <script>
+        // 1. Music Player Function
+        function playSong(driveId) {
             const player = document.getElementById('main-player');
             const source = document.getElementById('audio-source');
             const container = document.getElementById('player-container');
-            
-            // This specific format tells Google to just send the raw data
             source.src = `https://docs.google.com/uc?export=download&id=${driveId}`;
-            
             container.style.display = "block";
             player.load();
-            
-            // We add a tiny delay to let the "handshake" with Google happen
             setTimeout(() => {
                 player.play().catch(e => console.error("Playback failed:", e));
             }, 500);
         }
-        const ctx = canvas.getContext('2d');
-        let width, height, flakes = [];
 
-        function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            flakes = [];
-            for (let i = 0; i < 150; i++) {
-                flakes.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    size: Math.random() * 3 + 1,
-                    speed: Math.random() * 1 + 0.5
-                });
+        // 2. Diamond & Leaf Generator
+        function createWeather() {
+            const container = document.body;
+            const items = ['✦', '✧', '🍂', '🍁']; 
+            
+            for (let i = 0; i < 40; i++) {
+                const item = document.createElement('div');
+                const isLeaf = Math.random() > 0.5;
+                
+                item.className = isLeaf ? 'falling-item leaf' : 'falling-item diamond';
+                item.innerText = items[Math.floor(Math.random() * items.length)];
+                
+                item.style.left = Math.random() * 100 + 'vw';
+                item.style.animationDuration = (Math.random() * 8 + 12) + 's'; // Slow, elegant fall
+                item.style.animationDelay = (Math.random() * 20) + 's';
+                
+                container.appendChild(item);
             }
         }
 
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = "white";
-            ctx.beginPath();
-            flakes.forEach(f => {
-                ctx.moveTo(f.x, f.y);
-                ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
-                f.y += f.speed;
-                if (f.y > height) f.y = -5;
-            });
-            ctx.fill();
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', init);
-        init();
-        draw();
+        createWeather();
     </script>
 </body>
 </html>

@@ -184,9 +184,9 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
 <section class="glass-card">
             <h2>AUDIO FREQUENCIES</h2>
             <div class="grid">
-                <button class="track-btn" onclick="playSong('1Mbpw8nzWQSOMviJmEzREtDf2-1dWsU0a')">PHASE_01.wav</button>
-                <button class="track-btn" onclick="playSong('1CY2gpRWkf8pTfM21NYpKsYqeWIG-yS4Z')">PHASE_02.wav</button>
-                <button class="track-btn" onclick="playSong('1toSurqlJw0-iJPwXPo0D0S4g9wZqfZFs')">PHASE_03.wav</button>
+               <button class="track-btn" onclick="playSong('1M-U6f4f2qTfXvT2n_p9rGg-qVzE2mX-F')">All In My Mind.wav</button>
+<button class="track-btn" onclick="playSong('18_S-nI6tX9p4Z5_4f4qTfXvT2n_p9rGg')">wizhbonez.wav</button>
+<button class="track-btn" onclick="playSong('1_p9rGg-qVzE2mX-F18_S-nI6tX9p4Z5')">Clarinetz.wav</button>
             </div>
 
             <div id="player-container">
@@ -201,13 +201,13 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
         </div>
      <script>
-      function playSong(driveId) {
+  function playSong(driveId) {
             const player = document.getElementById('main-player');
             const source = document.getElementById('audio-source');
             const container = document.getElementById('player-container');
             
-            // This line uses backticks `` so the ID works!
-            source.src = `https://docs.google.com/uc?export=download&id=${driveId}`;
+            // This 'file/d/ID/preview' format bypasses most blocks
+            source.src = `https://drive.google.com/file/d/${driveId}/preview`;
             
             container.style.display = "block";
             player.load();

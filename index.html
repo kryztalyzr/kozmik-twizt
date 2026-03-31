@@ -7,6 +7,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
+            @keyframes pulse {
+    0% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+    50% { opacity: 1; text-shadow: 0 0 20px var(--diamond-glow); }
+    100% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+}
+#player-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid var(--glass-border);
+    display: none; /* Hidden until you click a song */
+}
+
+audio { width: 100%; filter: invert(100%); opacity: 0.8; }
             --silver: #C0C0C0;
             --diamond-glow: rgba(224, 247, 250, 0.8);
             --glass-bg: rgba(255, 255, 255, 0.05);
@@ -135,7 +148,20 @@
             color: #000;
             box-shadow: 0 0 20px #fff;
         }
-    </style>
+  @keyframes pulse {
+    0% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+    50% { opacity: 1; text-shadow: 0 0 20px var(--diamond-glow); }
+    100% { opacity: 0.4; text-shadow: 0 0 5px var(--silver); }
+}
+
+#player-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 1px solid var(--glass-border);
+    display: none; /* This stays hidden until you click a song */
+}
+
+audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
 </head>
 <body>
 
@@ -155,24 +181,38 @@
 </div>
             </div>
         </section>
-
-        <section class="glass-card">
+<section class="glass-card">
             <h2>AUDIO FREQUENCIES</h2>
-           <div class="grid">
-    <a href="https://drive.google.com/file/d/1Mbpw8nzWQSOMviJmEzREtDf2-1dWsU0a/preview" class="track-btn" target="_blank">PHASE_01.wav</a>
-    <a href="https://drive.google.com/file/d/1CY2gpRWkf8pTfM21NYpKsYqeWIG-yS4Z/preview" class="track-btn" target="_blank">PHASE_02.wav</a>
-    <a href="https://drive.google.com/file/d/1toSurqlJw0-iJPwXPo0D0S4g9wZqfZFs/preview" class="track-btn" target="_blank">PHASE_03.wav</a>
-</div>
-        </section>
+            <div class="grid">
+                <button class="track-btn" onclick="playSong('1Mbpw8nzWQSOMviJmEzREtDf2-1dWsU0a')">PHASE_01.wav</button>
+                <button class="track-btn" onclick="playSong('1CY2gpRWkf8pTfM21NYpKsYqeWIG-yS4Z')">PHASE_02.wav</button>
+                <button class="track-btn" onclick="playSong('1toSurqlJw0-iJPwXPo0D0S4g9wZqfZFs')">PHASE_03.wav</button>
+            </div>
 
-        <div class="links-footer">
+            <div id="player-container">
+                <p id="now-playing" style="font-size: 0.7rem; letter-spacing: 2px; color: #888; margin-bottom: 10px;">STREAMING ACTIVE</p>
+                <audio id="main-player" controls>
+                    <source id="audio-source" src="" type="audio/mpeg">
+                </audio>
+            </div>
+        </section>
+     <div class="links-footer">
             <a href="https://instagram.com/kryztalyzr" class="social-link">INSTAGRAM</a>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
         </div>
-    </div>
-
-    <script>
-        const canvas = document.getElementById('snow-canvas');
+     <script>
+      function playSong(driveId) {
+            const player = document.getElementById('main-player');
+            const source = document.getElementById('audio-source');
+            const container = document.getElementById('player-container');
+            
+            // This line uses backticks `` so the ID works!
+            source.src = `https://docs.google.com/uc?export=open&id=${driveId}`;
+            
+            container.style.display = "block";
+            player.load();
+            player.play();
+        }
         const ctx = canvas.getContext('2d');
         let width, height, flakes = [];
 

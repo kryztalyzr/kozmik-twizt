@@ -3,144 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRYZTALYZR | Kozmik Twizt</title>
+    <title>KRYZTALYZR | Diamond Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #d4af37;
-            --deep-red: #8b0000;
-            --glow-red: #ff0000;
-            --bg-black: #050505;
+            --silver: #C0C0C0;
+            --diamond-glow: rgba(224, 247, 250, 0.8);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
         body {
-            background-color: var(--bg-black);
-            background-image: radial-gradient(circle at center, #1a0000 0%, #050505 100%);
-            color: white;
-            font-family: 'Orbitron', 'Segoe UI', sans-serif; /* Orbitron gives that tech/cosmic look */
-            text-align: center;
-            padding: 40px 20px;
+            background-color: #000;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
-        h1 {
-            font-size: 4rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-            /* Sleek Diamond Text Effect */
-            text-shadow: 2px 2px 0px #444, 4px 4px 0px #000, 0 0 20px var(--glow-red);
-            font-weight: 900;
-        }
-
-        .sub-heading {
-            color: var(--gold);
-            letter-spacing: 5px;
-            margin-bottom: 50px;
-            opacity: 0.8;
+        /* Snow Animation */
+        #snow-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
-            max-width: 1100px;
-            margin: auto;
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
         }
 
-        section {
-            margin-bottom: 60px;
-            padding: 30px;
-            background: rgba(20, 20, 20, 0.7);
-            border: 1px solid var(--gold);
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            letter-spacing: 12px;
+            color: var(--silver);
+            text-shadow: 0 0 15px var(--diamond-glow);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            color: #888;
+            margin-bottom: 50px;
+        }
+
+        /* Glass Panels */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
             border-radius: 20px;
-            box-shadow: 0 0 30px rgba(139, 0, 0, 0.3);
-            backdrop-filter: blur(10px);
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            position: relative;
         }
 
         h2 {
-            color: var(--gold);
-            border-bottom: 2px solid var(--deep-red);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            color: var(--silver);
+            border-bottom: 1px solid var(--glass-border);
             display: inline-block;
             padding-bottom: 10px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
-        /* Video Grid */
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+        /* Diamond Lightning/Leaf Decor */
+        .decor {
+            position: absolute;
+            font-size: 24px;
+            filter: drop-shadow(0 0 5px var(--diamond-glow));
+            opacity: 0.6;
         }
+        .top-left { top: 15px; left: 15px; }
+        .top-right { top: 15px; right: 15px; }
 
-        iframe {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            border: 2px solid #333;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        iframe:hover {
-            transform: scale(1.02);
-            border-color: var(--gold);
-        }
-
-        /* Music Grid - 6 Slots */
-        .music-grid {
+        /* Grid for Tracks */
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 15px;
         }
 
-        .music-card {
-            background: linear-gradient(145deg, #1a1a1a, #000);
-            padding: 20px;
-            border-radius: 15px;
-            border-left: 4px solid var(--deep-red);
-            transition: 0.3s;
+        .track-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--silver);
+            padding: 15px;
             text-decoration: none;
-            color: white;
+            font-weight: 200;
+            transition: 0.3s;
+            border-radius: 10px;
+        }
+
+        .track-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 0 15px var(--diamond-glow);
+        }
+
+        /* Social/Donation Footer */
+        .links-footer {
+            margin-top: 50px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-weight: bold;
+            gap: 30px;
         }
 
-        .music-card:hover {
-            background: var(--deep-red);
-            border-left: 4px solid var(--gold);
-            transform: translateY(-5px);
+        .social-link {
+            color: var(--silver);
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            border: 1px solid var(--silver);
+            padding: 10px 25px;
+            border-radius: 50px;
+            transition: 0.4s;
         }
 
+        .social-link:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 0 20px #fff;
+        }
+
+        iframe {
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <canvas id="snow-canvas"></canvas>
 
     <div class="container">
         <header>
             <h1>KRYZTALYZR</h1>
-            <p class="sub-heading">KOZMIK TWIZT OFFICIAL</p>
+            <div class="subtitle">DIAMOND TRANSMISSION // 2026</div>
         </header>
 
-        <section id="videos">
-            <h2>LATEST VIDEOS</h2>
-            <div class="video-grid">
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_1" allowfullscreen></iframe>
-                <iframe src="https://www.youtube.com/embed/VIDEO_ID_2" allowfullscreen></iframe>
+        <section class="glass-card">
+            <span class="decor top-left">⚡</span>
+            <span class="decor top-right">🍁</span>
+            <h2>LATEST VISUALS</h2>
+            <div style="aspect-ratio: 16/9; background: #000; border-radius: 10px;">
+                <p style="padding-top: 20%; color: #444;">[ VIDEO FEED SECURED ]</p>
             </div>
         </section>
 
-        <section id="music">
-            <h2>AUDIO TRANSMISSIONS</h2>
-            <div class="music-grid">
-                <a href="LINK_1" class="music-card">TRACK 01</a>
-                <a href="LINK_2" class="music-card">TRACK 02</a>
-                <a href="LINK_3" class="music-card">TRACK 03</a>
-                <a href="LINK_4" class="music-card">TRACK 04</a>
-                <a href="LINK_5" class="music-card">TRACK 05</a>
-                <a href="LINK_6" class="music-card">TRACK 06</a>
+        <section class="glass-card">
+            <span class="decor top-left">💎</span>
+            <span class="decor top-right">⚡</span>
+            <h2>AUDIO FREQUENCIES</h2>
+            <div class="grid">
+                <a href="#" class="track-btn">PHASE_01.wav</a>
+                <a href="#" class="track-btn">PHASE_02.wav</a>
+                <a href="#" class="track-btn">PHASE_03.wav</a>
+                <a href="#" class="track-btn">PHASE_04.wav</a>
+                <a href="#" class="track-btn">PHASE_05.wav</a>
+                <a href="#" class="track-btn">PHASE_06.wav</a>
             </div>
         </section>
+
+        <div class="links-footer">
+            <a href="https://instagram.com/yourprofile" class="social-link">INSTAGRAM</a>
+            <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
+        </div>
     </div>
 
+    <script>
+        // Simple Snow Effect
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, flakes = [];
+
+        function init() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            flakes = [];
+            for (let i = 0; i < 150; i++) {
+                flakes.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 3 + 1,
+                    speed: Math.random() * 1 + 0.5
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "white";
+            ctx.beginPath();
+            flakes.forEach(f => {
+                ctx.moveTo(f.x, f.y);
+                ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+                f.y += f.speed;
+                if (f.y > height) f.y = -5;
+            });
+            ctx.fill();
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+    </script>
 </body>
 </html>

@@ -184,15 +184,15 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
 <section class="glass-card">
             <h2>AUDIO FREQUENCIES</h2>
             <div class="grid">
-               <button class="track-btn" onclick="playSong('1M-U6f4f2qTfXvT2n_p9rGg-qVzE2mX-F')">All In My Mind.wav</button>
-<button class="track-btn" onclick="playSong('18_S-nI6tX9p4Z5_4f4qTfXvT2n_p9rGg')">wizhbonez.wav</button>
-<button class="track-btn" onclick="playSong('1_p9rGg-qVzE2mX-F18_S-nI6tX9p4Z5')">Clarinetz.wav</button>
+     <button class="track-btn" onclick="playSong('18_S-nI6tX9p4Z5_4f4qTfXvT2n_p9rGg')">All In My Mind.wav</button>
+<button class="track-btn" onclick="playSong('1_p9rGg-qVzE2mX-F18_S-nI6tX9p4Z5')">wizhbonez.wav</button>
+<button class="track-btn" onclick="playSong('1M-U6f4f2qTfXvT2n_p9rGg-qVzE2mX-F')">Clarinetz.wav</button>       
             </div>
 
             <div id="player-container">
                 <p id="now-playing" style="font-size: 0.7rem; letter-spacing: 2px; color: #888; margin-bottom: 10px;">STREAMING ACTIVE</p>
                 <audio id="main-player" controls>
-                    <source id="audio-source" src="" type="audio/mpeg">
+                    <source id="audio-source" src="" type="audio/wav">
                 </audio>
             </div>
         </section>
@@ -201,17 +201,21 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
         </div>
      <script>
-  function playSong(driveId) {
+ function playSong(driveId) {
             const player = document.getElementById('main-player');
             const source = document.getElementById('audio-source');
             const container = document.getElementById('player-container');
             
-            // This 'file/d/ID/preview' format bypasses most blocks
-            source.src = `https://drive.google.com/file/d/${driveId}/preview`;
+            // This specific format tells Google to just send the raw data
+            source.src = `https://docs.google.com/uc?export=download&id=${driveId}`;
             
             container.style.display = "block";
             player.load();
-            player.play();
+            
+            // We add a tiny delay to let the "handshake" with Google happen
+            setTimeout(() => {
+                player.play().catch(e => console.error("Playback failed:", e));
+            }, 500);
         }
         const ctx = canvas.getContext('2d');
         let width, height, flakes = [];

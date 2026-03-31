@@ -92,24 +92,38 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }
             margin-bottom: 25px;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
+      .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
 
-        .track-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--silver);
-            padding: 15px;
-            text-decoration: none;
-            font-weight: 200;
-            transition: 0.3s;
-            border-radius: 10px;
-            display: block;
-        }
-
+      .track-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--silver);
+    padding: 15px 25px;
+    text-decoration: none;
+    font-family: 'Orbitron', sans-serif;
+    transition: 0.3s;
+    border-radius: 10px;
+    text-align: center;
+    flex: 1;
+    min-width: 150px;
+    max-width: 250px;
+}
+@media (max-width: 768px) {
+    .grid {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    .track-btn {
+        width: 80%;
+        max-width: 300px;
+    }
+}
         .track-btn:hover {
             background: rgba(255, 255, 255, 0.1);
             border-color: #fff;
@@ -198,110 +212,8 @@ audio { width: 100%; filter: invert(100%); opacity: 0.8; }  </style>
      <div class="links-footer">
             <a href="https://instagram.com/kryztalyzr" class="social-link">INSTAGRAM</a>
             <a href="https://paypal.me/yourlink" class="social-link">DONATE</a>
-    <style>
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind your text */
-            pointer-events: none;
-        }
-    </style>
-
-    <canvas id="snow-canvas"></canvas>
-
-    <script>
-        // 1. MP3 Player Logic
-        function playSong(fileName) {
-            const player = document.getElementById('main-player');
-            const source = document.getElementById('audio-source');
-            const container = document.getElementById('player-container');
-            source.src = fileName;
-            container.style.display = "block";
-            player.load();
-            setTimeout(() => {
-                player.play().catch(e => console.error("Playback failed:", e));
-            }, 100);
-        }
-
-        // 2. Cosmic Dust & Snow System
-        const canvas = document.getElementById('snow-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5; 
-                this.speed = Math.random() * 1 + 0.5;
-                this.velX = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.5 + 0.2;
-                this.isSparkle = Math.random() > 0.9; 
-            }
-
-            update() {
-                this.y += this.speed;
-                this.x += this.velX;
-
-                if (this.isSparkle) {
-                    this.opacity = Math.abs(Math.sin(Date.now() * 0.002)) * 0.8;
-                }
-
-                if (this.y > canvas.height) {
-                    this.y = -10;
-                    this.x = Math.random() * canvas.width;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                
-                if (this.isSparkle) {
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = "white";
-                } else {
-                    ctx.shadowBlur = 0;
-                }
-                
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            particles = [];
-            for (let i = 0; i < 150; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-
-        init();
-        animate();
-    </script>
+         
+   </div>
+    <script src="script.js"></script>
 </body>
 </html>

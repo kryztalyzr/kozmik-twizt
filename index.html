@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KRYZTALYZR | Diamond Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
        :root {
@@ -50,11 +51,11 @@
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 3.5rem;
-      letter-spacing: 12px;
+     font-size: clamp(1.8rem, 8vw, 3.5rem);
+letter-spacing: clamp(4px, 2vw, 12px);
       color: var(--silver);
       text-shadow: 0 0 15px var(--diamond-glow);
-      margin-bottom: 5px;
+     margin-bottom: 20px;
       text-transform: uppercase;
     }
 
@@ -70,8 +71,10 @@
       backdrop-filter: blur(15px);
       -webkit-backdrop-filter: blur(15px);
       border: 1px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 30px;
+    border-radius: 20px;
+   padding: 40px 20px;
+min-height: 200px;
+height: auto;
       margin-bottom: 40px;
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
@@ -106,6 +109,14 @@
       filter: invert(100%);
       opacity: 0.8;
     }
+    .visual-placeholder {
+    font-size: clamp(1rem, 4vw, 1.2rem);
+    color: var(--silver);
+    opacity: 0.5;
+    padding: 20px;
+    text-align: center;
+    }
+
 .pulse-text {
   animation: pulse 2s infinite ease-in-out;
 }
